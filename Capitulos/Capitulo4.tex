@@ -1,0 +1,539 @@
+% Capítulo 4
+s\chapter{Rommie: uma aplicação para prédios inteligentes}
+
+Poucos exemplos de  aplicações que lidam com o tema de reserva de espaços em prédios foram encontrados na literatura, os exemplos mais próximos encontrados foram os trabalhos citados na seção 3. Esses trabalhos possuem focos diferentes e atendem a alguns requisitos similares como exemplificado no quadro 01, mas ambos não suportam autenticação para o uso da salas e não dão suporte a uma maneira simples e fácil de acoplamento de novos sensores e dispositivos.  Em consequência  dessas funcionalidades não serem encontradas nas soluções anteriores, foi realizado o desenvolvimento da aplicação Roomie, que foi focada principalmente na incorporação do IoT. Nas próximas seções será descrito a aplicação Roomie em termos de arquitetura, requisitos e desenvolvimento das aplicações.
+
+
+\section{Concepção e Design da Aplicação}
+\subsection{Arquitetura da Aplicação}
+
+O sistema Roomie é composto por 3 diferentes aplicações. Cada uma com seu propósito especifíco. Sendo a primeira uma aplicação Web que tem como principal objetivo fornecer uma interface amigável para os usuários gerenciarem suas reservas; a segunda é a aplicação que roda no Raspberry Pi que é focada em trazer informações vindas de sensores para compor o sistema, e a terceira a chamada  aplicação de controle que tem como principal objetivo ajudar na coordenação de todo o sistema Roomie. A arquitetura é dividida na estrutura apresentada na Figura \ref{fig:arq}. 
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/DiagramaArquitetura.png}
+	\centering  	
+  	\captionsource{ Diagrama de Implementação
+\label{fig:arq}}{Próprio Autor}
+  	
+\end{figure}
+Abaixo segue uma descrição detalhada da arquitetura, onde os números romanos representam os dispositivos e as letras os softwares ou aplicações que rodam nesses dispositivos.
+\begin{enumerate}
+\item Desktop Ubuntu
+\begin{enumerate}
+\item RoomieController: Aplicação de controle desenvolvida na linguagem Java, tem como principal objetivo fazer o controle de disparos de eventos para as outras aplicações que estão rodando em outros dispositivos e o controle da aplicação no geral.
+\item RoomieWeb: Aplicação Web em Spring MVC que permite o usuário gerenciar suas reservas em uma interface amigável. 
+\item Plataforma Kaa IOT: é o \textit{middleware} de IoT responsável pela conexão das aplicações distintas, essa comunicação é baseada através do uso de eventos.
+\item Banco de Dados MySQL: Banco de dados local responsável pelo armazenamento de dados de usuário e das reservas. 
+\end{enumerate}
+\begin{enumerate}
+\item Desktop Ubuntu
+\begin{enumerate}
+	\item RoomieRaspberry: aplicação Java responsável pela captação e interpretação dos dados coletados pelos sensores e envio por meio de eventos para o Kaa.
+	\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+A comunicação entre as aplicações e o Middleware Kaa é realizada através do envio de eventos, que são disparadas pelas diferentes aplicações enviadas para o Kaa e depois para as aplicações de destino através do  protocolo TCP/IP. Enquanto que a comunicação das aplicações com o banco local é realizada através da API do Java de comunicação com o banco de dados, o JDBC.
+
+
+\subsection{Requisitos da Aplicação}
+
+Um software é construído para resolver um problema ou vários problemas levantados por alguma organização ou indivíduo, no entanto essa é uma visão bastante ampla do que o sistema precisa realizar, por isso é preciso descrever mais detalhadamente as funcionalidades e comportamento esperados. Uma descrição exata do que o sistema deve fazer pode ser expressada através de requisitos, requisitos são as funções e restrições da aplicação. Os requisitos do Roomie serão divididos em requisitos funcionais e não-funcionais., enquanto o outro é utilizado para descrever características mais genéricas do sistema e normalmente não de funcionalidades \cite{sommerville}.
+\subsubsection{Requisitos Funcionais}
+Os requisitos funcionais (RF) são utilizados para descrever as funcionalidades ou serviços promovidos pelo sistema \cite{sommerville}. Na tabela \ref{tab:TabelaRequisitos}, são especificados os requisitos da aplicação Roomie.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ | c | c | c |}
+\hline
+\thead{Código} & \thead{Nome} & \thead{A Third \\ Head} \\
+\hline
+RF01   & Efetuar Login& \makecell{O usuário deve efetuar login \\ no RoomieWeb para gerenciar suas reservas } \\ \hline
+RF02   & Cadastrar Reservas           & \makecell{Permite o usuário cadastrar novas reservas \\ RoomieWeb.}\\ \hline                                                                
+RF03   & Excluir Reservas             & \makecell{Permite o usuário excluir suas reservas no \\ RoomieWeb.}\\ \hline                                                                                
+RF04   & Visualizar Reservas          & \makecell{Permite o usuário visualizar suas reservas no \\ RoomieWeb}\\ \hline                                                                                                                                                              
+RF05   & Acessar sala com cartão RFID & 
+\makecell{O Acesso a sala reservada deve ser feito\\ apenas aos usuários cadastrados na reserva\\
+, através da utilização do cartão RFID cadastrado}
+\\ \hline
+\end{tabular}
+\end{center}
+\caption{Lista de requisitos funcionais}
+\label{tab:TabelaRequisitos}
+\end{table}
+
+\subsubsection{Modelagem de Casos de Uso}
+
+Uma forma de representar esses requisitos e os personagens que participam nele é através de um diagrama de casos de uso, esse modelo tem como principal finalidade modelar as funcionalidades do sistema \cite{bezerra}. Na figura \ref{fig:usecase} tem-se o  diagrama de casos de uso para o sistema Roomie. 
+
+As descrições completas dos casos de uso da figura \ref{fig:usecase} se encontram no Apêndice A. A tabela \ref{tab:TabelaAtores} contém a descrição dos atores (qualquer elemento externo que interaja com o sistema).
+
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/UseCase.png}
+	\centering  	
+  	\captionsource{ Diagrama de Casos de Uso
+\label{fig:usecase}}{Próprio Autor}
+  	
+\end{figure}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ | c | c | c |}
+\hline
+\thead{Ator}&\thead{Descrição}\\ \hline
+Usuário Comum&\makecell{Usuário que está logado na\\ aplicação RoomieWeb.}\\ \hline
+Usuário Admin&\makecell{Usuário que possui o acesso ao\\ RoomieRaspberry.}\\ \hline
+Participante&\makecell{É o usuário que possui \\cadastro no banco de dados, mas não \\ necessariamente reservou uma sala. Mas está incluído \\ na reserva como participante de uma reunião.}\\ \hline
+\end{tabular}
+\end{center}
+\caption{Atores}
+\label{tab:TabelaAtores}
+\end{table}
+
+\subsubsection{Requisitos Não Funcionais}
+
+Os requisitos não funcionais (RNF)  por sua vez são utilizados para descrever características mais genéricas do sistema e normalmente não de funcionalidades específicas \cite{sommerville}. A tabela \ref{tab:TabelaRNF}, são especificados os requisitos não funcionais da aplicação Roomie.
+
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ | c | c | c |}
+
+\hline
+\thead{Código}\thead{Nome}&\thead{Descrição}\\ \hline
+RNF01&Tempo de Resposta&
+\makecell{O tempo de resposta\\ das aplicações conectadas devem ser \\
+near real-time.}\\ \hline
+RNF02&Segurança na
+Aplicação Web&\makecell{O sistema deve permitir apenas\\ aos usuários logados permissão para gerenciar\\ reservas.}\\ \hline"
+RNF03&Interface&\makecell{As aplicações com interfaces\\ com o usuário devem ser claras e objetivas.}\\ \hline
+RNF04&Armazenamento de Senhas&
+\makecell{Apenas a senha no formato SHA256 será\\ armazenada no banco de\\ dados;}\\ \hline
+RF05&Acessar sala com cartão RFID&\makecell{O Acesso a\\ sala reservada deve ser \\eito apenas aos usuários\\ cadastrados na reserva,\\ através da utilização do \\cartão RFID cadastrado.}\\ \hline
+\end{tabular}
+\end{center}
+\caption{ Lista de requisitos não funcionais}
+\label{tab:TabelaRNF}
+\end{table}
+
+\subsection{Diagrama de Classes}
+Diagrama de classes são utilizados para representar o aspecto estrutural e estático do sistema. Estático por não descrever o comportamento dos objetos do sistema ao longo do tempo e estrutural por focar no relacionamento entre as partes do sistema \cite{bezerra}. Na Figura \ref{fig:classesRoomie} é mostrado o Diagrama de classes do sistema Roomie, focado em um nível geral das diferentes aplicações e os pacotes que compõem as aplicações. Na seção 4.2 serão incluídos outros diagramas de classes com mais detalhes estruturais das diferentes aplicações.
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/Overview.png}
+	\centering  	
+  	\captionsource{ Diagrama de Classes Roomie
+\label{fig:classesRoomie}}{Próprio Autor}
+  	
+\end{figure}
+
+\subsection{Modelo de Processo de Negócio}
+Nesta seção é utilizado o modelo de processo de negócio ou mais conhecido como BPM (\textit{Business Process Model}) para mostrar o comportamento e procedimentos mais importantes dentro dos sistemas Roomie. Esse tipo de diagrama consegue capturar bem fluxos de sequências e mensagens entre diferentes processos, algo que é bastante importante na aplicação Roomie, uma vez que os diferentes sistemas se comunicam constantemente através de envio de mensagens.O modelo da figura \ref{fig:bpmn} descreve o fluxo de uma reserva realizado pela aplicação Roomie.
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5,angle=90,origin=c]{Imagens/BPMN.png}
+	\centering  	
+  	\captionsource{BPM de Fluxo de reserva do Sistema Roomie
+\label{fig:bpmn}}{Próprio Autor}
+  	
+\end{figure}
+
+Descrição do BPM     
+
+\begin{enumerate}
+\item RoomieWeb
+\begin{enumerate}
+\item Gerenciar Reserva: Inicia quando o usuário modifica ou cria uma nova reserva e, logo após ocorre a gravação da mudança no banco de dados, caso essa reserva aconteça na hora corrente é enviada uma mensagem de atualização para o RoomieController, caso a reserva não aconteça na hora corrente o fluxo se encerra na atualização do banco.
+\end{enumerate}
+\item RoomieController: como descrito anteriormente o RoomieController tem como principal funcionalidade coordenar o sistema como um geral.
+Como mostrado no BPM existem 3 fluxos que podem acontecer nessa instância do sistema:
+
+\begin{enumerate}
+ 
+\item Interrupção de reserva: inicia quando a um recebimento de uma mensagem informando que uma reserva foi interrompida, a mensagem é enviada pelo Roomie Raspberry. Após isso ocorre uma gravação do cancelamento da reunião no banco dados  e o fluxo termina.
+\item Programação de reservas: de hora em hora um tarefa de programação para recuperar as reservas da hora seguinte é executada e são agendados os envio de mensagens de início das reservas para serem disparadas no horário da reserva. Quando o horário da reserva chega o sistema envia uma mensagem de início da reserva para o Roomie Raspberry e o fluxo se encerra.
+\item Atualização de Reservas: Quando alguma reserva da hora corrente é modificado é recebida uma mensagem indicando atualização na reserva, logo após isso são feitos os passos de atualizar as reservas que foram recuperadas para a hora corrente.
+
+\end{enumerate}
+\item RoomieRaspberry
+\begin{enumerate}
+\item Caso o cartão fornecido seja igual o de algum participante da reserva, o acesso a sala é liberado.Logo após o sistema entra no modo de detecção de presença, caso a sala fique com inatividade por mais de 5 minutos é enviada uma mensagem para o cancelamento da reserva. Caso não for registrado inatividade o sistema continua em detecção da presença até o fim do tempo da reserva e o fluxo finaliza.			
+\item Caso contrário o sistema  continua em modo de leitura até o que o cartão válido seja fornecido, caso se passe 20\% do tempo da reserva é enviando um email alertando o usuário do  possívvel cancelamento. Caso chegue a marca de 30\% do tempo total da reserva e nenhum cartão seja identificado a reserva é cancelada e é enviada uma mensagem para o cancelamento da reunião para o RoomieController.
+
+\end{enumerate}
+
+\end{enumerate}
+
+\section{Implementação e Testes da Aplicação}
+
+\subsection{Desenvolvimento da aplicação no Middleware Kaa}
+
+Para trazer a aplicação de reservas Roomie para o mundo de IoT foi utilizado o middleware Kaa, o Kaa possibilita a troca de mensagens entre as aplicações de maneira simples e com pequeno esforço.
+	A escolha do Kaa como middleware partiu pelo fato de ser uma plataforma de código-aberto, que é independente de plataforma e por ser atualmente estar sendo atualizada constantemente. Propiciando um espaço mais seguro e simples para o desenvolvimento da aplicação.
+\subsubsection{Configuração da Instalação do Kaa}
+
+Para a implementação do Roomie, o Kaa foi instalado em uma máquina virtual, a Oracle VM Virtual Box - 5.1.2, com 2GB reservados para a máquina virtual e com uso de 2 processadores. 
+
+\subsubsection{Visão Geral da Arquitetura e funcionamento do Kaa}
+
+A arquitetura do Kaa segundo \cite{cybervision} é formada basicamente por três partes distintas:
+\begin{itemize}
+
+\item Servidor Kaa : é a parte back-end da plataforma, é responsável pelo gerenciamento dos elementos que são acoplados a ferramenta como as aplicações, dispositivos e elementos internos.
+\item Extensões Kaa: são softwares independentes do Kaa, que ajudam o Kaa em funções específicas. Exemplos dessas extensões como mostrado na figura 08 é o Zookeeper Apache e  bancos de dados SQL e NoSQL.
+\item \textit{Endpoints SDKs}:  Os endpoints SDKs são bibliotecas instaladas nos dispositivos a serem conectados no Kaa. Esse sdk permite uma comunicação fácil e padronizada com o Kaa através de uma API. 
+
+
+\end{itemize}
+
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.2]{Imagens/kaa-arq.png}
+	\centering  	
+  	\captionsource{Arquitetura Kaa
+\label{fig:kaa-arq}}{\cite{cybervision-arq}}
+  	
+\end{figure}
+
+Existem dois tipos de mensagens de comunicação entre o servidor kaa e os \textit{endpoints sdks}, são as notificações e os eventos. As notificações são utilizadas para envio de mensagens do servidor Kaa para os endpoints que estão cadastrados no mesmo tópico. Enquanto que os eventos são utilizados para o envio de informações de \textit{endpoints} para outros \textit{endpoints}, e esse envio sendo gerenciado pelo servidor do Kaa. Na aplicação Roomie utilizamos apenas eventos como meio de comunicação dos endpoints.
+
+\subsubsection{Eventos} 
+A geração de eventos através da plataforma Kaa são suportados de maneira quase que tempo-real, os eventos são gerados por endpoints  gerados pelo mesmo usuários tratados e enviados pelo kaa para os endpoints que estão cadastrados para o recebimento do evento específico. Os dados enviados nos eventos são configuráveis no próprio Kaa, cada evento possuindo esquema diferente para classe que representa um evento \cite{cybervision-events}.
+	Cada evento possui uma classe de evento associada a ele, não podendo assim existir dois eventos com a mesma classe. Classes de evento (EC) são organizadas em famílias de classes de eventos (ECF). Cada \textit{endpoint} cadastra para o recebimento de uma classe de família, se o \textit{endpoint} recebe um evento de uma família específica deve ser configurado para receber todos os eventos da família específica. O envio de eventos pode ser feito para um \textit{endpoint} específico (unicast) ou para todos os \textit{endpoints} cadastrados para o recebimento para aquele evento (multicast) \cite{cybervision-events}.\\
+	\textbf{Classificando \textit{endpoints} segundo a ECF}
+	Os endpoints podem enviar, receber e enviar/receber eventos de uma ECF. Para distinguir os papéis do endpoints na configuração do endpoint podemos classificar \textit{endpoint} segundo a uma ECF  de três maneiras:
+\begin{itemize}
+\item source: apenas envia eventos mas não os recebe;
+\item sink : apenas recebe eventos;
+\item both: recebe e envia evento da ECF específica;\\
+
+\end{itemize}	
+\textbf{
+Eventos no Roomie}
+
+Para realizar a trocas de informações entre as diferentes aplicações Roomie  são utilizado os eventos do Kaa. Na Figura \ref{fig:events} é mostrado um diagrama ilustrando os eventos utilizados no Roomie. Na tabela \ref{tab:TabelaEventos01} se encontra descrição de todos os eventos utilizados pelo sistema Roomie. E na tabela \ref{tab:TabelaEventos02} uma descrição eventos e dos dados que são enviados por cada evento, a tabela \ref{tab:TabelaEventos03} é usado como apoio para a descrição de objetos.
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/events.png}
+	\centering  	
+  	\captionsource{Arquitetura Kaa
+\label{fig:events}}{Próprio Autor}
+  	
+\end{figure}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ | c | c | c |}
+\hline
+
+\thead{Família de Eventos}&\thead{Evento}&\thead{Descrição}\\ \hline
+RegisterUserECF&RegisterUserEvent&\makecell{Evento de registro de novo usuário}\\ \hline
+ConfirmationEventECF&ConfirmationEvent&\makecell{Evento de confirmação \\ de cadastro de usuário}\\ \hline
+StartMeetingECF&StartMeetingEvent&
+\makecell{Sinaliza o início de uma \\ reunião enviando \\as informações da reunião}\\ \hline
+InterruptingMeetingECF&InterruptMeetingEvent&
+\makecell{Evento de Cancelamento de Reserva}\\ \hline
+MeetingChangedECF&MeetingChangedEvent&
+\makecell{Sinaliza que uma reserva\\ na hora atual foi\\ modificada}\\ \hline
+\end{tabular}
+\end{center}
+\caption{ Lista de requisitos não funcionais}
+\label{tab:TabelaEventos01}
+\end{table}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ | c | c | c | c |}
+\hline
+	\thead{Evento}&\thead{Dados enviados}&\thead{Quem envia}&\thead{Quem recebe}\\ \hline
+	RegisterUserEvent&user: User
+user:User&\makecell{RoomieRaspberry}&\makecell{RoomieController}\\ \hline
+	ConfirmationEvent&
+		\makecell{status:String\\email:String\\
+		isRegistered:Boolean}
+         &\makecell{RoomieController}&
+         \makecell{RoomieRaspberry}\\  	    \hline 
+    StartMeetingEvent&meeting:Meeting&
+    \makecell{RoomieController}&\makecell{RoomieRaspberry}\\ 	\hline
+	InterruptMeetingEvent
+	&\makecell{meetingId:Integer\\interruptReason:String}    		    		  &\makecell{RoomieRaspberry}
+	&\makecell{RoomieController}\\ \hline MeetingChangedEvent&meetingId:Integer
+&\makecell{RoomieWeb}&\makecell{RoomieController}\\				             	\hline
+\end{tabular}
+\end{center}
+\caption{ Descrição detalhada dos eventos}
+\label{tab:TabelaEventos02}
+\end{table}
+
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ | c | c |}
+\hline
+	\thead{Objeto}&\thead{Descrição dos campos}\\ \hline
+User&\makecell{userName: String \\email: String\\
+hashedPassword: String\\
+isOwner:boolean\\
+rfidCode: String;}\\ \hline"
+Meeting&\makecell{users: Array Users
+\\startTime:String
+\\endTime:String
+\\meetingName:String
+\\meetingId:Integer
+\\roomLocation:String
+\\roomId:Integer
+\\roomName:String}\\ \hline
+
+\end{tabular}
+\end{center}
+\caption{Descrição dos objetos suporte}
+\label{tab:TabelaEventos03}
+\end{table}
+
+\subsubsection{Códigos Conexão Kaa - Java }
+Nesta seção são apresentados códigos básicos utilizados para a conexão com a plataforma Kaa.\\
+\textbf{Código de Inicialização do Kaa  
+}
+No trecho da figura \ref{fig:start-event}, um cliente Kaa é inicializado, e são definidos comportamentos para serem executados depois da inicialização e para quando o Kaa for pausado. Como as chamadas do Kaa são assíncronas, ou seja, o código continua a ser executado e não espera o fim da execução da chamada, é utilizado um mecanismo para pausar a thread principal até a chamada ser finalizada e o fim dela ser sinalizado.
+
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/start.png}
+	\centering  	
+  	\captionsource{ Código de inicialização cliente Kaa
+\label{fig:start-event}}{Próprio Autor}
+  	
+\end{figure}
+\textbf{
+Código de Anexação da cliente ao usuário}
+
+A anexação de um cliente a um usuário é necessária para habilitar o envio/recebimento de eventos, vindo desse cliente, o código na figura \ref{fig:attach} ilustra a operação de anexação.
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/attach.png}
+	\centering  	
+  	\captionsource{ Código de anexação do usuário
+\label{fig:attach}}{Próprio Autor}
+  	
+\end{figure}
+
+\textbf{Registro para recebimento de eventos
+}
+O código na figura \ref{fig:receive} representa o cadastramento do cliente para o recebimento do evento, nesse caso InterruptMeetingEvent e apresenta o comportamento após o recebimento do evento.
+
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/receive.png}
+	\centering  	
+  	\captionsource{ Código de registro de recebimento de eventos
+\label{fig:receive}}{Próprio Autor}
+  	
+\end{figure}
+
+\textbf{Envio de Eventos} 
+
+O código da figura \ref{fig:send} é utilizado para o envio de um evento. Anteriormente ao envio de um evento é necessário saber quais endpoints estão cadastrados para receber o evento específico, para isso é utilizado o método findEventListeners. Logo após identificado os endpoints pode se enviar o evento para um endpoint específico (unicast) ou para todos os endpoints cadastrados para o recebimento do evento (broadcast). No código apresentado na figura \ref{fig:send} o evento é enviado em modo broadcast.
+
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/send.png}
+	\centering  	
+  	\captionsource{ Código de envio de eventos
+\label{fig:send}}{Próprio Autor}
+  	
+\end{figure}
+
+\subsection{Desenvolvimento da aplicação RoomieRaspberry}
+A aplicação no Raspberry Pi foi feita na linguagem Java e para a interpretação dos dados que partiam dos sensores foi utilizada a biblioteca Pi4J. O Raspberry Pi foi escolhido pela a liberdade no uso de linguagens de programação e pelo seu maior poder computacional se comparando com outras placas de prototipação semelhantes. 
+	As principais funcionalidades presentes no RoomieRaspberry são a leitura dos dados de sensores RFID e de presença; o controle  no fluxo de execução da reserva como mostrado no BPM da figura \ref{fig:bpmn} e o recolhimento dos dados para cadastro do usuário na plataforma Roomie.
+
+\subsubsection{Diagrama de Classes}
+
+A estrutura do RoomieRaspberry é bem mais simples se comparado com as outras aplicações Roomie, basicamente as classes utilizadas são para realizar a comunicação com Kaa e para a leitura do sensor RFID. As classes de testes são de teste unitários das classes da aplicação.
+
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/roomieraspberry.png}
+	\centering  	
+  	\captionsource{Diagrama de Classes RoomieRaspberry
+\label{fig:class-rasp}}{Próprio Autor}
+  	
+\end{figure}
+
+\subsubsection{Configuração dos sensores no Raspberry Pi}
+
+Os sensores utilizados para a captação dos dados e para saída de dados foram os seguintes:
+\begin{itemize}
+\item Sensor de Presença PIR;
+\item Leitor cartão RFID RC522;
+\item Leds
+\end{itemize}
+
+Para a conexão com sensores o Raspberry Pi tem uma série de pinos de entrada/saída, os chamados GPIO, na figura \ref{fig:pins} é mostrado o mapeamento dos pinos.
+Na tabela \ref{TabelaPinos} segue o mapeamento dos pinos que foram usados para a conexão com os sensores.
+  
+
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=1.5]{Imagens/pins.png}
+	\centering  	
+  	\captionsource{ Mapeamento dos pinos do Raspberry Pi 2 e 3
+\label{fig:pins}}{\cite{microsoft}}
+  	
+\end{figure}
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ | c | c | c |}
+\hline
+\thead{Sensor/Pino}&\thead{Numeração Pino Raspberry}&\thead{Pino GPIO}\\ \hline
+RC522/SDA&24&\makecell{GPIO8}\\ \hline
+RC522/SCK&23&\makecell{GPIO11}\\ \hline
+RC522/MOSI&19&\makecell{GPIO10}\\ \hline
+RC522/MISO&21&\makecell{GPIO9}\\ \hline
+RC522/GND&20&\makecell{GND}\\ \hline
+RC522/3.3V&1&\makecell{3V3}\\ \hline
+PIR/VCC&2&\makecell{5V3}\\ \hline
+PIR/GND&6&\makecell{GND}\\ \hline
+PIR/OUT&16&\makecell{GIPO(23)}\\ \hline
+Led Vermelho&7&\makecell{GPIO 04}\\ \hline
+Led Verde&11&\makecell{GPIO 17}\\ \hline
+Led Amarelo&13&\makecell{GPIO 27}\\ \hline
+\end{tabular}
+\end{center}
+\caption{ Mapeamento de pinos para o Raspberry Pi}
+\label{tab:TabelaPinos}
+\end{table}
+
+Os Leds Coloridos são utilizados no fluxo de execução da reserva, um led por vez é acesso representando um estágio no fluxo de reserva.
+\begin{itemize}
+
+\item Vermelho: Não existe reserva no momento.
+\item Amarelo: Reserva identificada e sala pronta para a identificação do RFID.
+\item Verde: indica que o cartão RFID foi liberado e que a sala está liberada.
+
+\end{itemize} 
+
+\subsection{Desenvolvimento do RoomieWeb }
+
+A aplicação RoomieWeb foi desenvolvida utilizando a linguagem Java e o framework Spring MVC. O principal objetivo da aplicação é fornecer uma interface amigável para os usuários gerenciarem suas reservas. 
+
+\subsubsection{Diagrama de Classes 
+}
+A Figura \ref{fig:roomieweb} apresenta o diagrama de classes do RoomieWeb, como mencionado anteriormente é utilizado o modelo arquitetural MVC com adição de um pacote de Objeto de Acesso a Dados também chamado DAO (Data Access Object) para promover o desacoplamento das classes que lidam com banco de dados. As classes de teste no diagrama são classes utilizadas para testes unitários da aplicação.
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/roomieweb.png}
+	\centering  	
+\captionsource{ Diagrama de classes RoomieWeb 
+\label{fig:roomieweb}}{Próprio Autor}
+  	
+\end{figure}
+
+\subsection{Principais Telas da Aplicação}
+
+\textbf{Login}
+A figura \ref{fig:login} representa a tela inicial de login da aplicação RoomieWeb, nessa tela usuários que já estão cadastrado no sistema Roomie podem ter acesso a plataforma.\\
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/login.png}
+	\centering  	
+\captionsource{Tela de Login RoomieWeb 
+\label{fig:login}}{Próprio Autor}
+  	
+\end{figure}
+
+\textbf{Criação de nova reunião}
+
+
+A figura \ref{fig:createmeeting} representa a tela da criação de nova reservas na aplicação RoomieWeb, nessa tela o usuário pode criar uma nova reserva no RoomieWeb. Os campos de salas e usuários são populados diretamente do banco de dados.\\ 
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/createmeeting.png}
+	\centering  	
+\captionsource{Tela de Login RoomieWeb 
+\label{fig:createmeeting}}{Próprio Autor}
+  	
+\end{figure}
+
+
+\textbf{Visualização/Edição de Reservas}
+A figura \ref{fig:showmeetings} representa a tela de listagem de todas as reuniões que o usuário logado no momento participa, caso o usuário seja o criador da reserva também é possível realizar a edição/exclusão da reserva.\\
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/showmeetings.png}
+	\centering  	
+\captionsource{Listagem de reuniões do usuário 
+\label{fig:showmeetings}}{Próprio Autor}
+  	
+\end{figure}
+
+
+\subsubsection{Desenvolvimento do RoomieController}
+
+A Aplicação RoomieController tem como principal objetivo gerenciar o sistema como um todo, ou seja, é a entidade responsável por diversas atividades que permitem que aplicação funcione corretamente. A aplicação RoomieController recupera as informações necessárias para o funcionamento da aplicação RoomieRaspberry e também gerenciar o disparo de eventos de início de reuniões. Na Figura \ref{fig:roomiecontroller} é mostrado o diagrama de classes da aplicação.
+
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.5]{Imagens/roomiecontroller.png}
+	\centering  	
+\captionsource{Diagrama de Classes RoomieController
+\label{fig:roomiecontroller}}{Próprio Autor}
+  	
+\end{figure}
+
+
+
+\subsection{Execução Final da Aplicação}
+Para o teste final do sistema Roomie, foi feito um experimento em uma sala de reunião durante 2 horas. O roteiro do teste foi feito para que grande parte das possibilidades e situações diferentes fossem testadas.
+	Foram utilizados três personagens no cenário: Lauren, Alex e Camila. Os três tinham diferentes cartões rfids e cadastros separados na aplicação. A tabela \ref{tab:TabelaTestes} contém as reuniões que foram criadas e mais informações sobre cada reunião.
+
+
+
+\begin{table}
+
+\begin{tabular}{ | c | c | c | c |}
+\hline
+
+\thead{Nome da Reunião}&\thead{Horário }&\thead{Participantes}&\thead{Descrição do Cenário}\\ \hline
+Lauren - Individual&\makecell{09:00-09:15}&Lauren&
+\makecell{09:03 - Lauren recebe um email\\ informando 
+que caso não compareça a sala \\
+sua reserva será cancelada.\\
+09:03:30 Lauren entra na sala \\com seu cartão RFID e tem \\acesso permitido.}\\ \hline
+Plano de Ação&09:20 - 09:45&\makecell{Lauren, Alex}&\makecell{Lauren convida Camila \\para a reunião mas não edita a reserva.\\ 09:20 -Camila chega na sala,\\ mas não consegue se autenticar \\com seu cartão RFID.
+\\09:22 - Alex chega na reunião\\ cartão RFID e tem acesso liberado.}\\ \hline
+1:1 Camila e Alex&10:00 -10:30&\makecell{Camila, Alex}&\makecell{\\10:00 - Ambos chegam na reunião as 10:00 \\após 15 min a reunião é finalizada, \\mas os participantes não cancelam a \\reserva no sistema.
+\\10:20 - Reunião é automaticamente \\ cancelada}\\ \hline
+Camila - Individual&10:40-11:10&\makecell{Camila}&
+\makecell{10:46 - Camila recebe email \\avisando que sua reserva será \\ cancelada caso não \\compareça até às 10:49.\\
+10:50 - Camila tenta entrar\\ nas sala mas não consegue\\ autenticar com seu cartão.}
+\\ \hline
+
+\end{tabular}
+\caption{Tabela de casos de teste}
+\label{tab:TabelaTestes}
+\end{table}
+
+%\hyperref[video]{''http://bit.ly/2rGTlRp''}
+Vídeo de execução da aplicação
+%We use \hyperref[video]{lemma \ref*{video} }

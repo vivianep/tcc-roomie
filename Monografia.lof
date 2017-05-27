@@ -1,0 +1,23 @@
+\select@language {brazil}
+\contentsline {figure}{\numberline {1}{\ignorespaces Raspberry Pi 3, Modelo B. }}{14}
+\contentsline {figure}{\numberline {2}{\ignorespaces Leitor de Cart\~ao RFID RC522 }}{15}
+\contentsline {figure}{\numberline {3}{\ignorespaces Tag RFID de padr\~ao Mifare }}{15}
+\contentsline {figure}{\numberline {4}{\ignorespaces Sensor PIR }}{16}
+\contentsline {figure}{\numberline {5}{\ignorespaces Vis\~ao Geral do sistema }}{19}
+\contentsline {figure}{\numberline {6}{\ignorespaces Diagrama de Implementa\c c\~ao }}{24}
+\contentsline {figure}{\numberline {7}{\ignorespaces Diagrama de Casos de Uso }}{26}
+\contentsline {figure}{\numberline {8}{\ignorespaces Diagrama de Classes Roomie }}{28}
+\contentsline {figure}{\numberline {9}{\ignorespaces BPM de Fluxo de reserva do Sistema Roomie }}{38}
+\contentsline {figure}{\numberline {10}{\ignorespaces Arquitetura Kaa }}{39}
+\contentsline {figure}{\numberline {11}{\ignorespaces Arquitetura Kaa }}{39}
+\contentsline {figure}{\numberline {12}{\ignorespaces C\'odigo de inicializa\c c\~ao cliente Kaa }}{40}
+\contentsline {figure}{\numberline {13}{\ignorespaces C\'odigo de anexa\c c\~ao do usu\'ario }}{40}
+\contentsline {figure}{\numberline {14}{\ignorespaces C\'odigo de registro de recebimento de eventos }}{40}
+\contentsline {figure}{\numberline {15}{\ignorespaces C\'odigo de envio de eventos }}{41}
+\contentsline {figure}{\numberline {16}{\ignorespaces Diagrama de Classes RoomieRaspberry }}{41}
+\contentsline {figure}{\numberline {17}{\ignorespaces Mapeamento dos pinos do Raspberry Pi 2 e 3 }}{42}
+\contentsline {figure}{\numberline {18}{\ignorespaces Diagrama de classes RoomieWeb }}{43}
+\contentsline {figure}{\numberline {19}{\ignorespaces Tela de Login RoomieWeb }}{44}
+\contentsline {figure}{\numberline {20}{\ignorespaces Tela de Login RoomieWeb }}{45}
+\contentsline {figure}{\numberline {21}{\ignorespaces Listagem de reuni\~oes do usu\'ario }}{46}
+\contentsline {figure}{\numberline {22}{\ignorespaces Diagrama de Classes RoomieController }}{47}

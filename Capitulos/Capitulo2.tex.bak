@@ -1,0 +1,82 @@
+% Capítulo 2
+\chapter{Fundamentação Teórica}
+
+Para o desenvolvimento da aplicação Roomie diversas tecnologias e sistemas de hardware  diferentes  foram utilizados para promover escalabilidade, uma maior facilidade no desenvolvimento e fácil acoplação de novas funcionalidades para futuras aplicações.Nas próxima subseções são descritas em mais detalhes as tecnologias e os dispositivos utilizados no desenvolvimento da aplicação.
+
+\section{Java}
+
+A tecnologia Java é a base para praticamente todos os tipos de aplicações em rede hoje em dia sendo um padrão global para o desenvolvimento e distribuição de aplicações móveis, jogos, conteúdo baseado na Web e softwares corporativos. Atualmente existe uma comunidade grande de desenvolvedores do Java, mais de 9 milhões de pessoas em todo mundo.
+Uma das características mais importantes do Java é a possibilidade de reuso de aplicações portáteis de alto desempenho nos mais diversos dispositivos, ou seja, o software que é feito em uma plataforma pode ser executado em diversas outras plataformas com pouco esforço, permitindo se assim fornecer mais ser?içõs a um custo mais baixo tanto para empresa quanto para o consumidor final \cite{oracleJava}.
+\section{Raspberry Pi}
+
+O Raspberry Pi é um computador de propósito geral com o tamanho de um cartão de crédito, normalmente usado com o sistema operacional Linux e que possui a habilidade de rodar múltiplos programas \cite{justo}. 
+
+Além da sua função como um computador, o Raspberry Pi também lida com computação física, que no caso do Pi, pode ser descrito como a interface entre o dispositivo e o ambiente exterior. Através dessa conexão o Pi pode controlar e monitorar elementos externos que estejam conectados eletronicamente a ele. A interface de conexão entre o Pi e esses dispositivos externos é feita através da fileira pinos de propósito geral de entrada/saída ou em inglês General Purpose Input/Output(\abrv[GPIO -- General Purpose Input/Output]{GIPO}) 
+que se encontram na parte superior na placa. A versão do Raspberry Pi utilizada nesse projeto é a versão 3, modelo B, mostrado na figura  \ref{fig:raspberry-pi}. 
+
+\begin{figure}[htb]
+	\centering
+  	\includegraphics[scale=0.1]{Imagens/Raspberry-Pi.png}
+	\centering  	
+  	\captionsource{Raspberry Pi 3, Modelo B.
+\label{fig:raspberry-pi}}{\cite{Xbian}}
+  	
+\end{figure}
+
+
+\section{Sensor RFID MFRC522}
+
+O MFRC522 mostrado na figura \ref{fig:leitor-rfid} é um leitor com poder de leitura e escritas para comunicação sem necessidade de contato que opera em uma frequência de 13.56  MHz. O leitor se comunica com cartões que possuem os padrões ISO/IEC 14443 e  A/MIFARE cards. O MFRC522 permite a comunicação através das interfaces \cite{nxp}
+
+
+\begin{figure}
+	\centering
+  	\includegraphics[scale=0.3]{Imagens/leitor-rfid-rc522.jpg}
+	\centering  	
+  	\captionsource{Leitor de Cartão RFID RC522
+\label{fig:leitor-rfid}}{\cite{box}}
+  	
+\end{figure}
+
+Neste trabalho é utilizada a interface SPI  para a comunicação com o leitor, e são utilizados cartões e tags RFID com padrão Mifare como as mostradas na figura \ref{fig:tag-rfid}.
+ 
+\begin{figure}
+	\centering
+  	\includegraphics[scale=0.3]{Imagens/tag-rfid.jpg}
+	\centering  	
+  	\captionsource{Tag RFID de padrão Mifare
+\label{fig:tag-rfid}}{\cite{box}}
+  	
+\end{figure}
+
+\section{Sensor PIR}
+O sensor PIR (mostrado na figura \ref{fig:motion-sensor})  é utilizado comumente para a identificação de pessoas em um ambiente no raio de alcance do sensor. A sigla \abrv[PIR -- Passive-Infrared]{PIR} vem do inglês Passive-Infrared e é chamado dessa maneira por utilizar sensores piroelétricos para detectar níveis de radiação infravermelha. Esse tipo de sensor não identifica a distância em que o corpo está do sensor, apenas se há algum corpo no ambiente. O alcance do sensor é de aproximadamente 6 metros e ângulo de 110ºX70° \cite{adafruit}.
+
+
+
+ 
+\begin{figure}
+	\centering
+  	\includegraphics[scale=0.3]{Imagens/motion-sensor.jpg}
+	\centering  	
+  	\captionsource{Sensor PIR
+\label{fig:motion-sensor}}{\cite{easy}}
+  	
+\end{figure}
+
+\section{Kaa}
+
+O Kaa é uma plataforma aberta de Middleware de IoT, que permite a construção de aplicações completas desse paradigma, além de fornecer outras funcionalidades embutidas importantes para o desenvolvimento desse tipo de aplicação. Segundo \citeauthor{kaaiot} (\citeyear{kaaiot})''O Kaa permite um gerenciamento de dados para os objetos conectados e a sua infraestrutura através de componentes para o servidor e SDKs para os endpoints. Os SDKs são embutidos nos objetos conectados e implementam troca de dados bi-direcional com o servidor.''
+	O Kaa possibilita o uso de aplicações de larga-escala em IoT, promovendo os serviços de: comunicação entre objetos conectados, consistência de dados, segurança, interoperabilidade e uma conectividade a prova de erros \cite{kaaiot}.
+	
+\section{Pi4J}  
+O Pi4J Project é um projeto idealizado para fornecer uma interface orientada a objetos mais amigável para programadores Java utilizarem os recursos de entrada e saída do Raspberry Pi. Através da abstração de funções de baixo nível o Pi4J proporciona essa maior facilidade de uso de E/S \cite{pi4j}.
+
+\section{MySQL}
+Segundo \citeauthor{oracle-mysql}(citeyear{oracle-mysql}) MySQL é o sistema de gerenciamento de banco de dados aberto mais popular atualmente. É mantido pela Oracle Corporation. O MySQL lida com banco de dados relacional, comumente chamado de SQL que é a sigla para Structured Query Language (Linguagem Estruturada de Consultas).
+	O MySQL foi inicialmente criado para lidar grande quantidades de dados de uma forma mais rápida que as ferramentas existentes naquela mesma época. Mas também acabou se popularizando no desenvolvimento de pequenas aplicações uma vez que pode ser executado tanto em  computadores pessoais como em servidores-web, que possuem mais recursos dedicados \cite{oracle-mysql}.
+
+
+\section{Spring MVC}
+
+O Spring MVC é uma implementação do framework Spring para aplicações web baseado no modelo arquitetural model-view-controller. O Framework Spring é uma plataforma Java que permite o desenvolvimento de aplicações com suporte  focado para a infraestrutura da aplicação, o framework auxilia permitindo um desacoplamento das diferentes partes da aplicação. O modelo MVC está focado na divisão das camadas  de uma aplicação em visualização(\textit{view}) (que são os elementos que o usuário interage), modelo(\textit{model}) que é a representação em código dos objetos do mundo real e controles(\textit{controllers}), que faz a lógica da aplicação e permite a comunicação dos dois anteriores. O Spring MVC permite o desacoplamento das camadas que compõem uma aplicação wev e oferece as funcionalidades do framework Spring \cite{johnson}.

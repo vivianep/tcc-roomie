@@ -1,0 +1,28 @@
+% Folha de rosto
+% Contém os elementos essenciais à identificação do trabalho.
+
+% Título, nome do aluno e respectivo orientador e filiação
+\titulo{\Large{Roomie: uma aplicação para prédios inteligentes baseada na infraestrutura de Internet das Coisas}}
+\autor{Viviane Costa Pinheiro }
+\orientador[Orientador(a)]{\par Prof. Me.
+Itamir de Morais Barroca Filho
+}
+\instituicao
+{
+	Universidade Federal do Rio Grande do Norte -- UFRN \par 
+	Departamento de Informática e Matemática Aplicada -- DIMAp
+}
+	
+% Natureza do trabalho (não deve ser modificada)
+\comentario
+{
+	Monografia de Graduação apresentada ao Departamento de Informática e Matemática Aplicada do 
+	Centro de Ciências Exatas e da Terra da Universidade Federal do Rio Grande do Norte como
+	requisito parcial para a obtenção do grau de bacharel em Ciência da Computação.
+}
+		
+% Local e data
+\local{Natal-RN}
+\data{Maio 2017}
+	
+\folhaderosto

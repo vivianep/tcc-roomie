@@ -1,0 +1,38 @@
+% Introdução
+\chapter{Introdução}
+No panorama atual da Computação, um novo paradigma que surge com cada vez mais força nos últimos anos,  é a Internet das Coisas ou em inglês,  Internet of Things(\abrv[IoT -- Internet of Things]{IoT}). A IoT pode ser definida como uma rede mundial de objetos interconectados e unicamente endereçados, baseado em protocolos tradicionais de comunicação \cite{atzori}. Esse novo paradigma traz um novo tipo de relacionamento que antes era baseado apenas em homem-máquina  e passa também a ser máquina-máquina \cite{tan&wang}. A IoT traz uma possibilidade de dezenas de novas aplicações para o futuro, focando nas mais diversas áreas, como: transportes, logística, ambientes inteligentes, saúde e aplicação pessoais entre outras.
+
+Uma das aplicações que nos últimos anos tem ganhado cada vez mais força graças ao IoT, são as aplicações para smart buildings ou prédios inteligentes. Uma das definições fornecidas para Smart Building pelo  \cite{harris} , é que um smart building é um prédio que possui características mutáveis e possui  a habilidade de se adaptar a mudanças em ambientes externos e internos a fim de endereçar problemas de conforto, financeiro e  de consumo de energia. Grande parte das aplicações de smart building se concentram em proporcionar um gerenciamento mais inteligente dos espaços físicos dos prédios, proporcionando redução do consumo de energia e também uma melhor adaptação do prédio a condições externas como iluminação e temperatura.
+
+
+\section{Definição do Trabalho}
+Um dos grandes problemas em grandes prédios comerciais hoje em dia é a má utilização dos espaços, em especial das salas de reunião. E apesar de já existirem diversos sistemas que abordam o tema do controle de espaços, poucos possuem a habilidade de serem sensíveis ao ambiente em que estão inseridos, ou seja, poucos capturam dados e informações do ambiente que estão inseridos para uma tomada futura de decisão. A falta dessa característica implica na não detecção de alguns problemas comuns na utilização desses espaços. Os problemas comumente não detectados são:
+
+\begin{itemize}
+	\item \textit{No-show}. Acontece quando a sala é reservada, no entanto a reunião acaba sendo cancelada mas a reserva não. Esse comportamento não é tão incomum  quanto parece, pois aproximadamente 40\% das reservas acabam em no-show \cite{duncan}.  
+
+	\item Reservas maiores que reuniões. Um comportamento comum dos usuários que utilizam sistemas de reservas de salas é reservar um tempo maior que o necessário, para que não corram riscos de ficar sem sala. No entanto normalmente a reunião dura menos tempo que o reservado mas sala continua com o status de ocupada no sistema, pois não é possível a identificação do fim da reunião \cite{tran}. 
+	\item O ''roubo'' de salas. Essa situação ocorre quando alguns usuários desconsideram as reservas previamente feitas para a sala e utilizam o espaço sem ter realizado alguma reserva. Como normalmente não existe um mecanismo de autenticação para identificar o usuário que realizou a tarefa essa é uma situação que acaba sendo bastante comum.
+
+
+\end{itemize}
+Esses problemas de mau uso e inadequação dos sistemas a realidade dos prédios, acaba saindo caro para as empresas, pois serão necessárias um número muito superior de salas de reunião para suprir essa lacuna de salas sendo usadas ineficientemente.
+
+\section{Objetivos}
+
+Este trabalho tem o objetivo geral descrever o desenvolvimento de uma aplicação de Smart Building utilizando a infraestrutura da Internet das Coisas, aplicação é denominada Roomie. Os objetivos específicos  que querem ser alcançados ao final do texto são:
+\begin{itemize}
+	\item Relatar o desenvolvimento de uma aplicação baseada na arquitetura de IoT, desde sua documentação até sua implementação;
+	\item Realizar uma comparação das tecnologias atuais que possam ser usadas para desenvolver esse tipo de aplicação.
+	\item Identificar as possíveis dificuldades e limitações fornecidas pelas ferramentas atuais.
+\end{itemize}	
+
+\section{Organização do Trabalho}
+
+O trabalho é organizado em seções, que estão organizadas da seguinte maneira:
+\begin{itemize}
+	\item Na seção 2 são apresentadas as tecnologias que foram utilizadas no desenvolvimento da aplicação, 
+	\item Na seção 3 temos comparação com outras aplicações que tem finalidade similares e abordam o tema de controle de espaços em prédios.
+	\item Na seção 4 é descrita o desenvolvimento da ferramenta, requisitos, arquitetura. implementação de testes da aplicação.
+	\item A seção 5, retrata as considerações finais do trabalho e abre espaço para discussão sobre possíveis trabalhos futuros baseados no presente trabalho de conclusão.
+\end{itemize}	

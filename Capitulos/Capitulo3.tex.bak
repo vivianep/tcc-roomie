@@ -1,0 +1,91 @@
+% Capítulo 3
+\chapter{Trabalhos Relacionados}
+
+\section{Soluções para prédios inteligentes}
+\subsection{A Smart Room Scheduling and Management System with Utilization Control and Ad-hoc Support Based on Real-Time Occupancy Detection}
+
+Previamente ao desenvolvimento da aplicação Roomie foram pesquisados outros trabalhos científicos e softwares que possuíam foco no tema de controle de espaços físicos em prédios. Essas referências possibilitaram a aquisição de um maior conhecimento sobre o problema e o desenvolvimento de uma aplicação que tentasse resolver problemas que as soluções anteriores não resolviam. 
+
+O principal objetivo do trabalho de \citeauthor{tran} (\citeyear{tran}) é a construção de um sistema inteligente de reserva de salas que endereça o problema de subutilização de salas de reunião. Essa subutilização segundo o autor é causada principalmente por reuniões que não acontecem mas possuem reservas no sistema e por sistemas que não suportam disponibilidade em tempo real de novas reservas. A solução proposta para combater o problema reportado é através de uma aplicação que permite a ciência sobre status de ocupação das salas em tempo-real e que promove a integração dessa informação com sistema de reserva.  
+
+O sistema descrito no trabalho é composto por sensores de movimento (PIR) , cada sala possui um sensor conectado a um sistema embarcado que por sua vez possui uma uma conexão ethernet. Os sensores são utilizados para detecção de presença e os sinais captados são enviados via protocolo UDP(User Datagram Protocol) pelo sistema embarcado para um servidor que controla as reservas e que disponibiliza uma interface para os usuários gerenciarem suas reservas. A organização do sistema é ilustrada na figura \ref{fig:isense}.
+
+\begin{figure}
+	\centering
+  	\includegraphics[scale=0.8]{Imagens/isense.png}
+	\centering  	
+  	\captionsource{Visão Geral do sistema
+\label{fig:isense}}{\cite{tran}}
+  	
+\end{figure}
+Principais funcionalidades do sistema:
+\begin{itemize}
+
+\item Cancelamento de reserva automático por não detecção de presença;
+\item Gerenciamento de reservas em uma Interface Web própria;
+\item Fornecimento da informação em tempo real sobre a disponibilidade das salas; 
+\end{itemize}
+
+%\begin{enumerate}
+%	\item ter um extremo cuidado durante a redação do texto, principalmente com relação às regras gramaticais e ortográficas da língua; geralmente todo o texto é escrito na forma impessoal do verbo, não se utilizando, portanto, de termos em primeira pessoa, seja do plural ou do singular.
+%\end{enumerate}
+
+\subsection{iSense: A Wireless Sensor Network Based Conference Room Management System}
+O trabalho de  \citeauthor{padma} (\citeyear{padma})  é  em um sistema de reservas de salas que permite a detecção de presença e status dos aparelhos eletrônicos utilizados na sala. O foco do estudo é o melhor uso dos espaços através de espaços com maior consciência sobre sua ocupação e sobre a  utilização de aparelhos eletrônicos na sala. 
+	O sistema descrito no trabalho (chamado de iSense) é composto de um microcontrolador com sensores (sensor de presença, temperatura e luminosidade) conectados a ele, um transceptor sem fio, um gateway, uma aplicação de controle e um banco de registro de dados.  Todos os dados coletados dos sensores são enviados para um gateway conectado a um computador e interpretados por uma aplicação de controle. Os sensores são utilizados usados para detecção de pessoas (microfone e PIR sensor) e os outros sensores (luz e temperatura) são utilizados para a medição do consumo de energia. O funcionamento do iSense segue da seguinte maneira:
+
+\begin{enumerate}
+
+\item Usuário solicita através do iSense uma reserva;
+\item iSense checa se a sala no horário estabelecido está livre no MS Outlook, caso esteja confirma a reserva senão fornece a  opção do usuário entrar em uma fila para a reserva específica;
+\item O iSense monitora o uso das salas através dos sensores, caso uma sala for indicada não ocupada por 5 minutos após o tempo inicial, o dono da reserva recebe uma mensagem requisitando o cancelamento da reserva.
+\item Caso o usuário cancele a reserva, a próxima reserva que estava na lista de espera é alocada para o espaço da reserva cancelada.
+
+\end{enumerate}
+
+O iSense foi utilizado no campus da empresa que os autores trabalhavam e obtiveram como resultado final, um aumento de 27% de uso das salas de reunião e uma redução de 13% em energia elétrica. 			
+Principais funcionalidades do iSense:
+\begin{itemize}
+\item Sistema de fila para reservas;
+\item Conexão com Microsoft Outlook para efetuar reservas;
+\item Disponibilização das informações sobre os aparelhos eletrônicos ligados na sala (ar-condicionado e luzes).
+\item Sistema de detecção de presença;
+\end{itemize}
+
+%\begin{enumerate}
+%	\item ter um extremo cuidado durante a redação do texto, principalmente com relação às regras gramaticais e ortográficas da língua; geralmente todo o texto é escrito na forma impessoal do verbo, não se utilizando, portanto, de termos em primeira pessoa, seja do plural ou do singular.
+%\end{enumerate}
+
+\section{Comparativo entre soluções}
+
+Na tabela \ref{tab:TabelaComparativa} é feita uma comparação entre as soluções encontradas na literatura descritas na seção 3.1, baseado nas funcionalidades que os sistemas disponibilizam. E abaixo segue uma legenda para a tabela \ref{tab:TabelaComparativa}.
+
+
+\begin{enumerate}
+
+\item A Smart Room Scheduling and Management System with Utilization Control and Ad-hoc Support Based on Real-Time Occupancy Detection
+\item iSense: A Wireless Sensor Network Based Conference Room Management System
+\end{enumerate}
+
+\begin{table}[htb]
+	% Título de tabelas sempre aparecem antes da tabela
+	\textsf{\caption{ Comparativo de soluções de reserva de salas}}
+	\center
+	\begin{center}
+	
+		\begin{tabular}{|l|c|r|}
+			\hline
+			\textbf{Funcionalidade}&\textbf{1}&\textbf{2}\\
+			\hline			
+			Detecção de Presença& Sim&Sim\\
+			Status de ocupação de salas em tempo real&Sim&Não\\
+			Autenticação na entrada da sala&Não&Não\\	
+			Sistema de Gerenciamento de Reservas Próprio&Sim&Não\\					
+			Simplicidade no acoplamento de novos sensores& Não&Não\\
+			Status dos equipment eletrônicos& Não&Sim\\
+			Cancelamento automático de reservas por Inatividade& Sim&Não\\
+			\hline				 		 		
+		\end{tabular}
+	\end{center}
+	\label{tab:TabelaComparativa}
+\end{table}

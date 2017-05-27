@@ -1,0 +1,165 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.45.2.1 }
+
+\bibitem[{ADAFRUIT} 2017]{adafruit}
+\abntrefinfo{{ADAFRUIT}}{{ADAFRUIT}}{2017}
+{{ADAFRUIT}. \emph{PIR Motion Sensor:Pyroelectric ("Passive") InfraRed
+  Sensors}. 2017.
+Disponível em:
+  <\url{https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor?view=all}>.
+  Acesso em 16 de Mar 2017.}
+
+\bibitem[Atzori 2010]{atzori}
+\abntrefinfo{Atzori}{ATZORI}{2010}
+{ATZORI, L. The internet of things: A survey.
+\emph{Computer Networks}, v.~54, p. 2787--2805, 2010.}
+
+\bibitem[Bezerra 2007]{bezerra}
+\abntrefinfo{Bezerra}{BEZERRA}{2007}
+{BEZERRA, E. \emph{Princípios de Análise e Projeto de Sistemas com UML}. 2th.
+  ed. Rio de Janeiro: Elsevier, 2007.}
+
+\bibitem[{BOX ELECTRÓNICA} 2017]{box}
+\abntrefinfo{{BOX ELECTRÓNICA}}{{BOX ELECTRÓNICA}}{2017}
+{{BOX ELECTRÓNICA}. \emph{How to solve the problem of meeting room no-shows}.
+  2017.
+Disponível em:
+  <\url{https://www.boxelectronica.com/pt/rfid-nfc/77-leitor-rfid-rc522.html}>.
+  Acesso em 02 Mar 2017.}
+
+\bibitem[{CYBERVISION INC.} 2016]{cybervision}
+\abntrefinfo{{CYBERVISION INC.}}{{CYBERVISION INC.}}{2016a}
+{{CYBERVISION INC.} \emph{Architeture Overview}. 2016.
+Disponível em:
+  <\url{https://kaaproject.github.io/kaa/docs/v0.10.0/Architecture-overview/}>.
+  Acesso em Out ,2016.}
+
+\bibitem[{CYBERVISION INC.} 2016]{cybervision-arq}
+\abntrefinfo{{CYBERVISION INC.}}{{CYBERVISION INC.}}{2016b}
+{{CYBERVISION INC.} \emph{Architeture Overview}. 2016.
+Disponível em:
+  <\url{https://kaaproject.github.io/kaa/docs/v0.10.0/Architecture-overview/attach/high-level-architecture.png
+  }> Acesso em Out 2016.}
+
+\bibitem[{CYBERVISION INC.} 2016]{cybervision-events}
+\abntrefinfo{{CYBERVISION INC.}}{{CYBERVISION INC.}}{2016c}
+{{CYBERVISION INC.} \emph{Events}. 2016.
+Disponível em:
+  <\url{https://kaaproject.github.io/kaa/docs/v0.10.0/Programming-guide/Key-platform-features/Events/}>.
+  Acesso em Out ,2016.}
+
+\bibitem[Duncan 2016]{duncan}
+\abntrefinfo{Duncan}{DUNCAN}{2016}
+{DUNCAN, J. \emph{How to solve the problem of meeting room no-shows}. 2016.
+Out., 2016.Disponível em:
+  <\url{http://blog.condecosoftware.com/how-to-solve-the-problem-of-meeting-room-no-shows}>.
+  Acesso em Outubro ,2016.}
+
+\bibitem[{EASY ELECTRONYX} 2017]{easy}
+\abntrefinfo{{EASY ELECTRONYX}}{{EASY ELECTRONYX}}{2017}
+{{EASY ELECTRONYX}. 2017.
+Disponível em:
+  <\url{https://easyelectronyx.com/wp-content/uploads/2017/01/motion-sensor-productshot-01.jpg}>.
+  Acesso em 01 Mar 2017.}
+
+\bibitem[Harris 2012]{harris}
+\abntrefinfo{Harris}{HARRIS}{2012}
+{HARRIS, A. Smart buildings.
+\emph{Energy And Technology Magazine}, v.~57, p. 277--295, 2012.}
+
+\bibitem[Johnson et al. 2017]{johnson}
+\abntrefinfo{Johnson et al.}{JOHNSON et al.}{2017}
+{JOHNSON, R. et al. \emph{Spring Framework Reference}. 2017.
+Disponível em:
+  <\url{http://docs.spring.io/spring/docs/current/spring-framework-reference/pdf/spring-framework-reference.pdf}>.
+  Acesso em 17 Mar 2017.}
+
+\bibitem[Justo 2016]{justo}
+\abntrefinfo{Justo}{JUSTO}{2016}
+{JUSTO, P. \emph{Raspberry Pi or Arduino? One Simple Rule to Choose the Right
+  Board}. 2016.
+Disponível em:
+  <\url{http://makezine.com/2015/12/04/admittedly-simplistic-guide-raspberry-pi-vs-arduino/}>.
+  Acesso em 11 out 2016.}
+
+\bibitem[{KAAIOT TECHNOLOGIES} 2016]{kaaiot}
+\abntrefinfo{{KAAIOT TECHNOLOGIES}}{{KAAIOT TECHNOLOGIES}}{2016}
+{{KAAIOT TECHNOLOGIES}. \emph{Kaa IoT Development Platform overview}. 2016.
+Disponível em: <\url{https://www.kaaproject.org/overview/}> Acesso em 12 Nov
+  2016.}
+
+\bibitem[{Microsoft and Fritzing } 2016]{microsoft}
+\abntrefinfo{{Microsoft and Fritzing }}{{Microsoft and Fritzing }}{2016}
+{{Microsoft and Fritzing }. 2016.
+Disponível em:
+  <\url{<https://az835927.vo.msecnd.net/sites/iot/Resources/images/PinMappings/RP2_Pinout.png}>.
+  Acesso em 10 out 2016.}
+
+\bibitem[{NXP SEMICONDUCTORS} 2017]{nxp}
+\abntrefinfo{{NXP SEMICONDUCTORS}}{{NXP SEMICONDUCTORS}}{2017}
+{{NXP SEMICONDUCTORS}. \emph{MRFC522:Standard performance MIFARE and NTAG
+  frontend}. 2017.
+Disponível em: <\url{https://www.nxp.com/documents/data_sheet/MFRC522.pdf}>.
+  Acesso em 17 Mar 2017.}
+
+\bibitem[{ORACLE} 2016]{oracleJava}
+\abntrefinfo{{ORACLE}}{{ORACLE}}{2016}
+{{ORACLE}. \emph{Obtenha Informações sobre a Tecnologia Java}. 2016.
+Disponível em: <\url{https://www.java.com/pt_BR/about/}>. Acesso em 13 out
+  2016.}
+
+\bibitem[{Oracle} 2017]{oracle-mysql}
+\abntrefinfo{{Oracle}}{{Oracle}}{2017}
+{{Oracle}. \emph{About MySQL}. 2017.
+Disponível em:
+  <\url{http://www.biblioteca.fsp.usp.br/~biblioteca/guia/a_cap_03.htm>.}>.
+  Acesso em 17 Mar 2017.}
+
+\bibitem[Padmanabh et al. 2009]{padma}
+\abntrefinfo{Padmanabh et al.}{PADMANABH et al.}{2009}
+{PADMANABH, K. et al. isense: A wireless sensor network based conference room
+  management system. In:  \emph{BuildSys '09 Proceedings of the First ACM
+  Workshop on Embedded Sensing Systems for Energy-Efficiency in Buildings}.
+  [S.l.: s.n.], 2009. p. 37--32.}
+
+\bibitem[{PI4J} 2017]{pi4j}
+\abntrefinfo{{PI4J}}{{PI4J}}{2017}
+{{PI4J}. \emph{The Pi4J Project: Java I/O Library for Raspberry Pi}. 2017.
+Disponível em:
+  <\url{http://blog.condecosoftware.com/how-to-solve-the-problem-of-meeting-room-no-shows}>.
+  Acesso em Out 2016.}
+
+\bibitem[Sommerville 2006]{sommerville}
+\abntrefinfo{Sommerville}{SOMMERVILLE}{2006}
+{SOMMERVILLE, I. \emph{Software Engineering: (Update) (8th Edition)
+  (International Computer Science)}. Boston, MA, USA: Addison-Wesley Longman
+  Publishing Co., Inc., 2006.
+ISBN 0321313798.}
+
+\bibitem[Tan e Wang 2010]{tan&wang}
+\abntrefinfo{Tan e Wang}{TAN; WANG}{2010}
+{TAN, L.; WANG, N. Future internet: The internet of things. In:  \emph{2010 3rd
+  International Conference on Advanced Computer Theory and
+  Engineering(ICACTE)}. [S.l.: s.n.], 2010. v.~5, p. 376--380.
+ISSN 2154-7491.}
+
+\bibitem[Tran et al. 2016]{tran}
+\abntrefinfo{Tran et al.}{TRAN et al.}{2016}
+{TRAN, L.~D. et al. A smart meeting room scheduling and management system with
+  utilization control and ad-hoc support based on real-time occupancy
+  detection. In:  \emph{2016 IEEE Sixth International Conference on
+  Communications and Electronics (ICCE)}. [S.l.: s.n.], 2016. p. 186--191.}
+
+\bibitem[{XBIAN COMMUNITY} 2017]{Xbian}
+\abntrefinfo{{XBIAN COMMUNITY}}{{XBIAN COMMUNITY}}{2017}
+{{XBIAN COMMUNITY}. \emph{DB2XML 1.4: relational databases into documents}.
+  2017.
+Out., 2017.Disponível em:
+  <\url{http://www.xbian.org/preliminary-raspberry-pi-3-support}>. Acesso em
+  Março 1,2017.}
+
+\end{thebibliography}

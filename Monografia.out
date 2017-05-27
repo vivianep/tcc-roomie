@@ -1,0 +1,42 @@
+\BOOKMARK [0][-]{chapter.1}{Introdu\347\343o}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Defini\347\343o do Trabalho}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Objetivos}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Organiza\347\343o do Trabalho}{chapter.1}% 4
+\BOOKMARK [0][-]{chapter.2}{Fundamenta\347\343o Te\363rica}{}% 5
+\BOOKMARK [1][-]{section.2.1}{Java}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{Raspberry Pi}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.3}{Sensor RFID MFRC522}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.4}{Sensor PIR}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.5}{Kaa}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.6}{Pi4J}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.7}{MySQL}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.8}{Spring MVC}{chapter.2}% 13
+\BOOKMARK [0][-]{chapter.3}{Trabalhos Relacionados}{}% 14
+\BOOKMARK [1][-]{section.3.1}{Solu\347\365es para pr\351dios inteligentes}{chapter.3}% 15
+\BOOKMARK [2][-]{subsection.3.1.1}{A Smart Room Scheduling and Management System with Utilization Control and Ad-hoc Support Based on Real-Time Occupancy Detection}{section.3.1}% 16
+\BOOKMARK [2][-]{subsection.3.1.2}{iSense: A Wireless Sensor Network Based Conference Room Management System}{section.3.1}% 17
+\BOOKMARK [1][-]{section.3.2}{Comparativo entre solu\347\365es}{chapter.3}% 18
+\BOOKMARK [0][-]{chapter.4}{Rommie: uma aplica\347\343o para pr\351dios inteligentes}{}% 19
+\BOOKMARK [1][-]{section.4.1}{Concep\347\343o e Design da Aplica\347\343o}{chapter.4}% 20
+\BOOKMARK [2][-]{subsection.4.1.1}{Arquitetura da Aplica\347\343o}{section.4.1}% 21
+\BOOKMARK [2][-]{subsection.4.1.2}{Requisitos da Aplica\347\343o}{section.4.1}% 22
+\BOOKMARK [3][-]{subsubsection.4.1.2.1}{Requisitos Funcionais}{subsection.4.1.2}% 23
+\BOOKMARK [3][-]{subsubsection.4.1.2.2}{Modelagem de Casos de Uso}{subsection.4.1.2}% 24
+\BOOKMARK [3][-]{subsubsection.4.1.2.3}{Requisitos N\343o Funcionais}{subsection.4.1.2}% 25
+\BOOKMARK [2][-]{subsection.4.1.3}{Diagrama de Classes}{section.4.1}% 26
+\BOOKMARK [2][-]{subsection.4.1.4}{Modelo de Processo de Neg\363cio}{section.4.1}% 27
+\BOOKMARK [1][-]{section.4.2}{Implementa\347\343o e Testes da Aplica\347\343o}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.2.1}{Desenvolvimento da aplica\347\343o no Middleware Kaa}{section.4.2}% 29
+\BOOKMARK [3][-]{subsubsection.4.2.1.1}{Configura\347\343o da Instala\347\343o do Kaa}{subsection.4.2.1}% 30
+\BOOKMARK [3][-]{subsubsection.4.2.1.2}{Vis\343o Geral da Arquitetura e funcionamento do Kaa}{subsection.4.2.1}% 31
+\BOOKMARK [3][-]{subsubsection.4.2.1.3}{Eventos}{subsection.4.2.1}% 32
+\BOOKMARK [3][-]{subsubsection.4.2.1.4}{C\363digos Conex\343o Kaa - Java }{subsection.4.2.1}% 33
+\BOOKMARK [2][-]{subsection.4.2.2}{Desenvolvimento da aplica\347\343o RoomieRaspberry}{section.4.2}% 34
+\BOOKMARK [3][-]{subsubsection.4.2.2.1}{Diagrama de Classes}{subsection.4.2.2}% 35
+\BOOKMARK [3][-]{subsubsection.4.2.2.2}{Configura\347\343o dos sensores no Raspberry Pi}{subsection.4.2.2}% 36
+\BOOKMARK [2][-]{subsection.4.2.3}{Desenvolvimento do RoomieWeb }{section.4.2}% 37
+\BOOKMARK [3][-]{subsubsection.4.2.3.1}{Diagrama de Classes }{subsection.4.2.3}% 38
+\BOOKMARK [2][-]{subsection.4.2.4}{Principais Telas da Aplica\347\343o}{section.4.2}% 39
+\BOOKMARK [3][-]{subsubsection.4.2.4.1}{Desenvolvimento do RoomieController}{subsection.4.2.4}% 40
+\BOOKMARK [2][-]{subsection.4.2.5}{Execu\347\343o Final da Aplica\347\343o}{section.4.2}% 41
+\BOOKMARK [0][-]{table.4.9}{Refer\352ncias}{}% 42
